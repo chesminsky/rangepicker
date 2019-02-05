@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { SgvRangepickerComponent } from './rangepicker.component';
+import { SgvDatepickerDirective } from './rangepicker.directive';
 
 @NgModule({
 	imports: [
 	],
-	declarations: [SgvRangepickerComponent],
-	exports: [SgvRangepickerComponent]
+	declarations: [SgvDatepickerDirective],
+	exports: [SgvDatepickerDirective]
 })
 export class SgvRangepickerModule { }
