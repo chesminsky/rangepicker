@@ -16,6 +16,14 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "sgv-rangepicker": [
+        "dist/sgv-rangepicker"
+      ],
+      "sgv-rangepicker/*": [
+        "dist/sgv-rangepicker/*"
+      ]
+    }
   }
 }
