@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, HostListener, Output } from '@angular/core';
+import { Component, OnInit, Input, HostListener, Output, Inject } from '@angular/core';
 import * as moment_ from 'moment';
 const moment = moment_;
 import { CalendarDay, CalendarPeriod, CalendarEvents, RangepickerPreset } from '../types';
 import { EventEmitter } from '@angular/core';
 import { presets } from '../presets';
+import { SgvRangepickerDefaultsService } from '../defaults.service';
 
 @Component({
 	selector: 'sgv-rangepicker',
@@ -50,7 +51,9 @@ export class SgvRangepickerComponent {
 
 	public visible = false;
 
-	constructor() {}
+	constructor(
+		@Inject(SgvRangepickerDefaultsService) public defaults
+	) {}
 
 	/**
 	 * Initialize rangepicker

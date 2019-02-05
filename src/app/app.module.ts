@@ -19,7 +19,9 @@ import { SgvRangepickerModule } from '@sgv/rangepicker';
 		MatInputModule,
 		FormsModule,
 		ReactiveFormsModule,
-		SgvRangepickerModule
+		SgvRangepickerModule.forRoot({
+			color: 'red'
+		})
 	],
 	providers: [ { provide: LOCALE_ID, useValue: 'ru' } ],
 	bootstrap: [AppComponent]

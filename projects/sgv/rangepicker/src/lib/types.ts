@@ -23,3 +23,7 @@ export interface RangepickerPreset {
 	end:  moment.Moment;
 	code: string;
 }
+
+export interface RangepickerConfig {
+	mainColor?: string;
+}
