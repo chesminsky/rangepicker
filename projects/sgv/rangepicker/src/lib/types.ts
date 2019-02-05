@@ -19,7 +19,6 @@ export interface CalendarEvents {
 }
 
 export interface RangepickerPreset {
-	title: string;
 	start:  moment.Moment;
 	end:  moment.Moment;
 	code: string;

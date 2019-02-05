@@ -2,10 +2,10 @@
     <header class="m-calendar-wrapper__header">
         <ul>
             <li [ngClass]="{'is-active': tab === 1}" (click)="tab = 1">
-                Предустановленные
+                {{ 'PRESETS' | translate }}
             </li>
             <li [ngClass]="{'is-active': tab === 2}" (click)="tab = 2">
-                Интервал дат
+                {{ 'DATE_INTERVAL' | translate}}
             </li>
         </ul>
     </header>
@@ -16,7 +16,7 @@
                     <ul>
                         <li *ngFor="let preset of presets | slice :  0 : chunkSize"
                             (click)="setPeriod(preset.code);">
-                            {{preset.title}}
+                            {{ preset.code | translate }}
                         </li>
                     </ul>
                 </div>
@@ -24,7 +24,7 @@
                     <ul>
                         <li *ngFor="let preset of presets | slice : chunkSize: presets.length"
                             (click)="setPeriod(preset.code);">
-                            {{preset.title}}
+                            {{ preset.code | translate}}
                         </li>
                     </ul>
                 </div>

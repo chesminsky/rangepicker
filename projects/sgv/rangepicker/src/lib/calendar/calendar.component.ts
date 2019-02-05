@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, LOCALE_ID, Inject } from '@angular/core';
 import * as moment_ from 'moment';
 const moment = moment_;
 import { CalendarDay, CalendarPeriod, CalendarEvents } from '../types';
@@ -26,7 +26,9 @@ export class SgvCalendarComponent implements OnInit {
 	@Input()
 	private hoveredDate: moment_.Moment;
 
-	constructor() {}
+	constructor(
+		@Inject(LOCALE_ID) private locale: string
+	) {}
 
 	public ngOnInit() {
 
@@ -52,7 +54,7 @@ export class SgvCalendarComponent implements OnInit {
 	}
 
 	public getMonthTitle(): string {
-		const str = this.month.locale('ru').format('MMMM, YYYY');
+		const str = this.month.locale(this.locale).format('MMMM, YYYY');
 		return str.charAt(0).toUpperCase() + str.slice(1);
 	}
 

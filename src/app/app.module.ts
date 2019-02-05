@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material';
 import { MatInputModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,7 +21,7 @@ import { SgvRangepickerModule } from '@sgv/rangepicker';
 		ReactiveFormsModule,
 		SgvRangepickerModule
 	],
-	providers: [],
+	providers: [ { provide: LOCALE_ID, useValue: 'ru' } ],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
