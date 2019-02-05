@@ -1,89 +1,66 @@
-import { Directive, Input, ElementRef, OnInit, HostListener, AfterViewInit } from '@angular/core';
+/**
+ * Rangepicker directive for input elements
+ */
+
+import { Directive, Input, ElementRef, OnInit, HostListener, AfterViewInit, OnDestroy } from '@angular/core';
 import { SgvRangepickerComponent } from './rangepicker/rangepicker.component';
 import * as moment_ from 'moment';
+import { CalendarPeriod } from './types';
+import { Subscription } from 'rxjs';
 const moment = moment_;
 
 @Directive({
 	selector: '[sgvRangepicker]'
 })
-export class SgvDatepickerDirective implements AfterViewInit {
+export class SgvRangepickerDirective implements AfterViewInit, OnDestroy {
+
+	private sub: Subscription;
 
 	@Input()
-	sgvRangepicker: SgvRangepickerComponent;
+	private sgvRangepicker: SgvRangepickerComponent;
 
 	constructor(
 		private elemRef: ElementRef
-	) {
-
-	}
-
+	) {}
 
 	ngAfterViewInit() {
-
 		this.processChange(this.elemRef.nativeElement.value);
+		this.sgvRangepicker.init();
 
-		let counter = 0;
-		const d = this.sgvRangepicker;
-
-		d.events.on('updateModel', (date: moment_.Moment) => {
-			if (counter === 0) {
-				// pick first time
-				d.period.start = date.valueOf();
-				d.period.end = null;
-			}
-
-			if (counter === 1) {
-				// pick second time
-				if (date.valueOf() < d.period.start.valueOf()) {
-					d.period.end = moment(d.period.start).endOf('day').valueOf();
-					d.period.start = date.valueOf();
-				} else {
-					d.period.end = date.endOf('day').valueOf();
-				}
-			}
-
-			if (d.period.start && d.period.end) {
-				d.visible = false;
-				this.genString();
-			}
-
-			counter++;
-
-			if (counter === 2) {
-				counter = 0;
-			}
-
-		});
-
-		d.events.on('hovered', function (date: moment_.Moment) {
-			d.hoveredDate = date;
+		this.sub = this.sgvRangepicker.datesChanged.subscribe((period: CalendarPeriod) => {
+			const start = Number(period.start);
+			const end = Number(period.end);
+			this.elemRef.nativeElement.value = moment(start).format('DD.MM.YYYY') + ' - ' + moment(end).format('DD.MM.YYYY');
 		});
 	}
 
-	private genString() {
-		const d = this.sgvRangepicker;
-		if (!d.period || !d.period.start || !d.period.end) {
-			return;
-		}
-
-		const start = Number(d.period.start);
-		const end = Number(d.period.end);
-
-		this.elemRef.nativeElement.value = moment(start).format('DD.MM.YYYY') + ' - ' + moment(end).format('DD.MM.YYYY');
+	ngOnDestroy() {
+		this.sub.unsubscribe();
 	}
 
+	/**
+	 * Bind to click event
+	 */
 	@HostListener('click')
-	onclick() {
+	public onclick(): void {
 		this.sgvRangepicker.visible = true;
 	}
 
+	/**
+	 * Bind to input event
+	 * @param event - input event
+	 */
 	@HostListener('input', ['$event'])
-	onInput(event) {
+	public onInput(event): void {
 		const value = event.target.value;
 		this.processChange(value);
 	}
 
-	private processChange(value: string) {
+	/**
+	 * Process changes of input element, set rangepicker model
+	 * @param value - input string
+	 */
+	private processChange(value: string): void {
 		let valid: boolean;
 
 		if (!value) {
@@ -107,4 +84,5 @@ export class SgvDatepickerDirective implements AfterViewInit {
 			}
 		}
 	}
+
 }

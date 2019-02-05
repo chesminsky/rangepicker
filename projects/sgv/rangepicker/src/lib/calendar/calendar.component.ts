@@ -26,10 +26,9 @@ export class SgvCalendarComponent implements OnInit {
 	@Input()
 	private hoveredDate: moment_.Moment;
 
-	constructor() {
-	}
+	constructor() {}
 
-	public ngOnInit () {
+	public ngOnInit() {
 
 		this.monthIndex = moment().month();
 		this.year = moment().year();

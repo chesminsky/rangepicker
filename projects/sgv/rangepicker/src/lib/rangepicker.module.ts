@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SgvDatepickerDirective } from './rangepicker.directive';
+import { SgvRangepickerDirective } from './rangepicker.directive';
 import { SgvCalendarComponent } from './calendar/calendar.component';
 import { SgvRangepickerComponent } from './rangepicker/rangepicker.component';
 import { CommonModule } from '@angular/common';
@@ -9,12 +9,12 @@ import { CommonModule } from '@angular/common';
 		CommonModule
 	],
 	declarations: [
-		SgvDatepickerDirective,
+		SgvRangepickerDirective,
 		SgvCalendarComponent,
 		SgvRangepickerComponent,
 	],
 	exports: [
-		SgvDatepickerDirective,
+		SgvRangepickerDirective,
 		SgvRangepickerComponent
 	]
 })
