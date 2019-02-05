@@ -1,37 +1,37 @@
 <div class="m-calendar-wrapper" *ngIf="visible">
     <header class="m-calendar-wrapper__header">
         <ul>
-            <!-- <li ng-class="{'is-active': rangepicker.tab === 1}" ng-click="rangepicker.tab = 1">
+            <li [ngClass]="{'is-active': tab === 1}" (click)="tab = 1">
                 Предустановленные
-            </li> -->
-            <li ng-class="{'is-active': rangepicker.tab === 2}" ng-click="rangepicker.tab = 2">
+            </li>
+            <li [ngClass]="{'is-active': tab === 2}" (click)="tab = 2">
                 Интервал дат
             </li>
         </ul>
     </header>
     <div class="m-calendar-wrapper__inner">
-        <!-- <div ng-if="rangepicker.tab === 1" class="m-calendar-wrapper__presets">
+        <div *ngIf="tab === 1" class="m-calendar-wrapper__presets">
             <div class="m-calendar-wrapper__row">
                 <div class="m-calendar-wrapper__col">
                     <ul>
-                        <li ng-repeat="preset in rangepicker.presets | limitTo : rangepicker.chunkSize"
-                            ng-click="rangepicker.setPeriod(preset.code);">
+                        <li *ngFor="let preset of presets | slice :  0 : chunkSize"
+                            (click)="setPeriod(preset.code);">
                             {{preset.title}}
                         </li>
                     </ul>
                 </div>
                 <div class="m-calendar-wrapper__col">
                     <ul>
-                        <li ng-repeat="preset in rangepicker.presets | limitTo : rangepicker.chunkSize: rangepicker.chunkSize"
-                            ng-click="rangepicker.setPeriod(preset.code);">
+                        <li *ngFor="let preset of presets | slice : chunkSize: presets.length"
+                            (click)="setPeriod(preset.code);">
                             {{preset.title}}
                         </li>
                     </ul>
                 </div>
             </div>
 
-        </div> -->
-        <div class="m-calendar-wrapper__row">
+        </div>
+        <div class="m-calendar-wrapper__row" *ngIf="tab === 2">
             <div class="m-calendar-wrapper__col">
                 <sgv-calendar side="left" [period]="period" [events]="events" [hoveredDate]="hoveredDate"></sgv-calendar>
             </div>

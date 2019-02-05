@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, HostListener, Output } from '@angular/core';
 import * as moment_ from 'moment';
 const moment = moment_;
-import { CalendarDay, CalendarPeriod, CalendarEvents } from '../types';
+import { CalendarDay, CalendarPeriod, CalendarEvents, RangepickerPreset } from '../types';
 import { EventEmitter } from '@angular/core';
+import { presets } from '../presets';
 
 @Component({
 	selector: 'sgv-rangepicker',
@@ -13,6 +14,9 @@ export class SgvRangepickerComponent {
 
 	public period: CalendarPeriod;
 	public hoveredDate: moment_.Moment;
+	public presets: Array<RangepickerPreset> = presets;
+	public tab = 1;
+	public chunkSize = Math.ceil(this.presets.length / 2);
 
 	@Output()
 	public datesChanged: EventEmitter<CalendarPeriod> = new EventEmitter();
@@ -98,4 +102,22 @@ export class SgvRangepickerComponent {
 		e.stopPropagation();
 	}
 
+	/**
+	 * Set period from presets
+	 */
+	public setPeriod(code: string): void {
+		this.period.start = this.getPresetValueByCode(code, 'start');
+		this.period.end = this.getPresetValueByCode(code, 'end');
+		this.visible = false;
+		this.datesChanged.emit(this.period);
+	}
+
+	/**
+	 * Get date in ms from preset
+	 * @param code - preset code
+	 * @param key - end or start
+	 */
+	private getPresetValueByCode(code: string, key: 'start' | 'end'): number  {
+		return this.presets.find(p => p.code === code)[key].valueOf();
+	}
 }
