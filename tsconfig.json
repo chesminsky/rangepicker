@@ -23,6 +23,12 @@
       ],
       "sgv-rangepicker/*": [
         "dist/sgv-rangepicker/*"
+      ],
+      "@sgv/rangepicker": [
+        "dist/sgv/rangepicker"
+      ],
+      "@sgv/rangepicker/*": [
+        "dist/sgv/rangepicker/*"
       ]
     }
   }

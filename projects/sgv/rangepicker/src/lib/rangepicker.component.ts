@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'sgv-rangepicker',
-  template: `
+	selector: 'sgv-rangepicker',
+	template: `
     <p>
-      sgv-rangepicker works!!
+      SgvRangepicker works!
     </p>
   `,
-  styles: []
+	styles: []
 })
 export class SgvRangepickerComponent implements OnInit {
 
-  constructor() { }
+	constructor() { }
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+	}
 
 }

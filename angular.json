@@ -122,33 +122,33 @@
         }
       }
     },
-    "sgv-rangepicker": {
-      "root": "projects/sgv-rangepicker",
-      "sourceRoot": "projects/sgv-rangepicker/src",
+    "@sgv/rangepicker": {
+      "root": "projects/sgv/rangepicker",
+      "sourceRoot": "projects/sgv/rangepicker/src",
       "projectType": "library",
       "prefix": "sgv",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/sgv-rangepicker/tsconfig.lib.json",
-            "project": "projects/sgv-rangepicker/ng-package.json"
+            "tsConfig": "projects/sgv/rangepicker/tsconfig.lib.json",
+            "project": "projects/sgv/rangepicker/ng-package.json"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/sgv-rangepicker/src/test.ts",
-            "tsConfig": "projects/sgv-rangepicker/tsconfig.spec.json",
-            "karmaConfig": "projects/sgv-rangepicker/karma.conf.js"
+            "main": "projects/sgv/rangepicker/src/test.ts",
+            "tsConfig": "projects/sgv/rangepicker/tsconfig.spec.json",
+            "karmaConfig": "projects/sgv/rangepicker/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/sgv-rangepicker/tsconfig.lib.json",
-              "projects/sgv-rangepicker/tsconfig.spec.json"
+              "projects/sgv/rangepicker/tsconfig.lib.json",
+              "projects/sgv/rangepicker/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
