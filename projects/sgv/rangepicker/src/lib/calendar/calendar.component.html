@@ -1,0 +1,36 @@
+<div class="m-calendar">
+	<header class="m-calendar__header">
+		<div class="m-calendar__nav m-calendar__nav--left">
+			<i (click)="navigate('prev')" *ngIf="side !== 'right'"></i>
+		</div>
+		<div class="m-calendar__title" >
+			{{ getMonthTitle() }}
+		</div>
+		<div class="m-calendar__nav m-calendar__nav--right">
+			<i (click)="navigate('next')" *ngIf="side !== 'left'"></i>
+		</div>
+	</header>
+
+	<table>
+		<thead>
+			<th *ngFor="let th of headings">{{th}}</th>
+		</thead>
+		<tbody>
+			<tr *ngFor="let week of weeks">
+				<td *ngFor="let day of week.days" 
+					(click)="select(day)"
+					(mouseover)="onHover(day);">
+					
+					<span [ngClass]="{
+									'is-today': day.isToday,
+									'is-selected': isSelected(day.date),
+									'is-between': isBetween(day.date)
+								}"
+						*ngIf="day.isCurrentMonth">
+						{{day.number}}
+					</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

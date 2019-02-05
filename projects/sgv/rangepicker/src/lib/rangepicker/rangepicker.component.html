@@ -1,0 +1,43 @@
+<div class="m-calendar-wrapper" *ngIf="visible">
+    <header class="m-calendar-wrapper__header">
+        <ul>
+            <!-- <li ng-class="{'is-active': rangepicker.tab === 1}" ng-click="rangepicker.tab = 1">
+                Предустановленные
+            </li> -->
+            <li ng-class="{'is-active': rangepicker.tab === 2}" ng-click="rangepicker.tab = 2">
+                Интервал дат
+            </li>
+        </ul>
+    </header>
+    <div class="m-calendar-wrapper__inner">
+        <!-- <div ng-if="rangepicker.tab === 1" class="m-calendar-wrapper__presets">
+            <div class="m-calendar-wrapper__row">
+                <div class="m-calendar-wrapper__col">
+                    <ul>
+                        <li ng-repeat="preset in rangepicker.presets | limitTo : rangepicker.chunkSize"
+                            ng-click="rangepicker.setPeriod(preset.code);">
+                            {{preset.title}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="m-calendar-wrapper__col">
+                    <ul>
+                        <li ng-repeat="preset in rangepicker.presets | limitTo : rangepicker.chunkSize: rangepicker.chunkSize"
+                            ng-click="rangepicker.setPeriod(preset.code);">
+                            {{preset.title}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div> -->
+        <div class="m-calendar-wrapper__row">
+            <div class="m-calendar-wrapper__col">
+                <sgv-calendar side="left" [period]="period" [events]="events" [hoveredDate]="hoveredDate"></sgv-calendar>
+            </div>
+            <div class="m-calendar-wrapper__col">
+                <sgv-calendar side="right" [period]="period" [events]="events" [hoveredDate]="hoveredDate"></sgv-calendar>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 import { Directive, Input, ElementRef, OnInit, HostListener, AfterViewInit } from '@angular/core';
-// import { SgvRangepickerComponent } from './datepicker/datepicker.component';
-// import * as moment_ from 'moment';
-// const moment = moment_;
+import { SgvRangepickerComponent } from './rangepicker/rangepicker.component';
+import * as moment_ from 'moment';
+const moment = moment_;
 
 @Directive({
 	selector: '[sgvRangepicker]'
@@ -9,7 +9,7 @@ import { Directive, Input, ElementRef, OnInit, HostListener, AfterViewInit } fro
 export class SgvDatepickerDirective implements AfterViewInit {
 
 	@Input()
-	sgvRangepicker: any; // SgvRangepickerComponent
+	sgvRangepicker: SgvRangepickerComponent;
 
 	constructor(
 		private elemRef: ElementRef
@@ -19,11 +19,11 @@ export class SgvDatepickerDirective implements AfterViewInit {
 
 
 	ngAfterViewInit() {
-			/*
+
 		this.processChange(this.elemRef.nativeElement.value);
 
 		let counter = 0;
-		const d = this.mtsDatepicker;
+		const d = this.sgvRangepicker;
 
 		d.events.on('updateModel', (date: moment_.Moment) => {
 			if (counter === 0) {
@@ -58,11 +58,10 @@ export class SgvDatepickerDirective implements AfterViewInit {
 		d.events.on('hovered', function (date: moment_.Moment) {
 			d.hoveredDate = date;
 		});
-		*/
 	}
-	/*
+
 	private genString() {
-		const d = this.mtsDatepicker;
+		const d = this.sgvRangepicker;
 		if (!d.period || !d.period.start || !d.period.end) {
 			return;
 		}
@@ -75,7 +74,7 @@ export class SgvDatepickerDirective implements AfterViewInit {
 
 	@HostListener('click')
 	onclick() {
-		this.mtsDatepicker.visible = true;
+		this.sgvRangepicker.visible = true;
 	}
 
 	@HostListener('input', ['$event'])
@@ -98,15 +97,14 @@ export class SgvDatepickerDirective implements AfterViewInit {
 			valid = start.isValid() && end.isValid() && start.valueOf() <= end.valueOf();
 
 			if (valid) {
-				this.mtsDatepicker.period = {
+				this.sgvRangepicker.period = {
 					start: start.valueOf(),
 					end: end.valueOf()
 				};
 			} else {
-				this.mtsDatepicker.period = {};
-				this.mtsDatepicker.visible = false;
+				this.sgvRangepicker.period = {};
+				this.sgvRangepicker.visible = false;
 			}
 		}
 	}
-	*/
 }
