@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'sgv-sgv-rangepicker',
+  selector: 'sgv-rangepicker',
   template: `
     <p>
-      sgv-rangepicker works!
+      sgv-rangepicker works!!
     </p>
   `,
   styles: []
