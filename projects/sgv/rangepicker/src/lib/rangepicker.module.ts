@@ -31,7 +31,7 @@ export class SgvRangepickerModule {
 				{
 					provide: SgvRangepickerDefaultsService,
 					useValue: Object.assign({
-						color: '#FBC02D'
+						color: '#3f51b5'
 					}, config)
 				}
 

@@ -55,6 +55,15 @@ export class SgvRangepickerComponent {
 		@Inject(SgvRangepickerDefaultsService) public defaults
 	) {}
 
+	public show() {
+		this.visible = true;
+	}
+
+	public hide() {
+		this.visible = false;
+		this.presets.forEach((p) => p.hovered = false);
+	}
+
 	/**
 	 * Initialize rangepicker
 	 */
@@ -80,7 +89,7 @@ export class SgvRangepickerComponent {
 			}
 
 			if (this.period.start && this.period.end) {
-				this.visible = false;
+				this.hide();
 				this.datesChanged.emit(this.period);
 			}
 
@@ -111,7 +120,7 @@ export class SgvRangepickerComponent {
 	public setPeriod(code: string): void {
 		this.period.start = this.getPresetValueByCode(code, 'start');
 		this.period.end = this.getPresetValueByCode(code, 'end');
-		this.visible = false;
+		this.hide();
 		this.datesChanged.emit(this.period);
 	}
 

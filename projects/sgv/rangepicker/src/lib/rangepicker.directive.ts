@@ -39,15 +39,15 @@ export class SgvRangepickerDirective implements AfterViewInit, OnDestroy {
 	}
 
 	/**
-	 * Bind to click event
+	 * Show picker on input focus
 	 */
-	@HostListener('click')
+	@HostListener('focus')
 	public onclick(): void {
-		this.sgvRangepicker.visible = true;
+		this.sgvRangepicker.show();
 	}
 
 	/**
-	 * Bind to input event
+	 * Pick dates on input changes
 	 * @param event - input event
 	 */
 	@HostListener('input', ['$event'])
@@ -80,7 +80,7 @@ export class SgvRangepickerDirective implements AfterViewInit, OnDestroy {
 				};
 			} else {
 				this.sgvRangepicker.period = {};
-				this.sgvRangepicker.visible = false;
+				this.sgvRangepicker.hide();
 			}
 		}
 	}

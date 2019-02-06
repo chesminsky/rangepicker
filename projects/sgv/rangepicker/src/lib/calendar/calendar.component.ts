@@ -2,6 +2,7 @@ import { Component, OnInit, Input, LOCALE_ID, Inject } from '@angular/core';
 import * as moment_ from 'moment';
 const moment = moment_;
 import { CalendarDay, CalendarPeriod, CalendarEvents } from '../types';
+import { SgvRangepickerDefaultsService } from '../defaults.service';
 
 @Component({
 	selector: 'sgv-calendar',
@@ -27,7 +28,8 @@ export class SgvCalendarComponent implements OnInit {
 	private hoveredDate: moment_.Moment;
 
 	constructor(
-		@Inject(LOCALE_ID) private locale: string
+		@Inject(LOCALE_ID) private locale: string,
+		@Inject(SgvRangepickerDefaultsService) public defaults
 	) {}
 
 	public ngOnInit() {

@@ -1,5 +1,5 @@
 <div class="m-calendar-wrapper" *ngIf="visible">
-    <header class="m-calendar-wrapper__header">
+    <header class="m-calendar-wrapper__header" [ngStyle]="{'background-color': defaults.color}">
         <ul>
             <li [ngClass]="{'is-active': tab === 1}" (click)="tab = 1">
                 {{ 'PRESETS' | translate }}
@@ -15,7 +15,10 @@
                 <div class="m-calendar-wrapper__col">
                     <ul>
                         <li *ngFor="let preset of presets | slice :  0 : chunkSize"
-                            (click)="setPeriod(preset.code);">
+                            [ngStyle]="preset.hovered ? {'color':  defaults.color } : {}"
+                            (click)="setPeriod(preset.code);"
+                            (mouseover)="preset.hovered=true"
+                            (mouseleave)="preset.hovered=false">
                             {{ preset.code | translate }}
                         </li>
                     </ul>
@@ -23,7 +26,10 @@
                 <div class="m-calendar-wrapper__col">
                     <ul>
                         <li *ngFor="let preset of presets | slice : chunkSize: presets.length"
-                            (click)="setPeriod(preset.code);">
+                            [ngStyle]="preset.hovered ? {'color':  defaults.color } : {}"
+                            (click)="setPeriod(preset.code);"
+                            (mouseover)="preset.hovered=true"
+                            (mouseleave)="preset.hovered=false">
                             {{ preset.code | translate}}
                         </li>
                     </ul>

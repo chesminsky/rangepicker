@@ -1,10 +1,7 @@
-@import "../common.scss";
-
-
 .m-calendar-wrapper {
 	position: absolute;
 	z-index: 1000;
-	top: 60px;
+	top: 40px;
 	left: 0;
 
 	width: 530px;
@@ -49,7 +46,6 @@
 
 		line-height: 67px;
 
-		background: $m-picker-color;
 		box-shadow: 0 2px 2.82px .18px rgba(0, 0, 0, .24);
 
 
@@ -95,15 +91,6 @@
 			list-style: none;
 
 			cursor: pointer;
-			&.is-active {
-				color: $m-picker-color;
-			}
-
-			&:hover {
-				cursor: pointer;
-
-				color: $m-picker-color;
-			}
 		}
 	}
 }

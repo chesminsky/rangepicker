@@ -20,7 +20,7 @@ import { SgvRangepickerModule } from '@sgv/rangepicker';
 		FormsModule,
 		ReactiveFormsModule,
 		SgvRangepickerModule.forRoot({
-			color: 'red'
+			// color: 'red'
 		})
 	],
 	providers: [ { provide: LOCALE_ID, useValue: 'ru' } ],
