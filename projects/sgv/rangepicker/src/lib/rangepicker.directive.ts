@@ -21,7 +21,9 @@ export class SgvRangepickerDirective implements AfterViewInit, OnDestroy {
 
 	constructor(
 		private elemRef: ElementRef
-	) {}
+	) {
+		this.windowClick = this.windowClick.bind(this);
+	}
 
 	ngAfterViewInit() {
 		this.processChange(this.elemRef.nativeElement.value);
@@ -32,17 +34,21 @@ export class SgvRangepickerDirective implements AfterViewInit, OnDestroy {
 			const end = Number(period.end);
 			this.elemRef.nativeElement.value = moment(start).format('DD.MM.YYYY') + ' - ' + moment(end).format('DD.MM.YYYY');
 		});
+
+		window.addEventListener('click', this.windowClick);
 	}
 
 	ngOnDestroy() {
 		this.sub.unsubscribe();
+		window.removeEventListener('click', this.windowClick);
 	}
 
 	/**
-	 * Show picker on input focus
+	 * Show picker
 	 */
-	@HostListener('focus')
-	public onclick(): void {
+	@HostListener('click', ['$event'])
+	public onclick(e): void {
+		e.stopPropagation();
 		this.sgvRangepicker.show();
 	}
 
@@ -83,6 +89,10 @@ export class SgvRangepickerDirective implements AfterViewInit, OnDestroy {
 				this.sgvRangepicker.hide();
 			}
 		}
+	}
+
+	private windowClick() {
+		this.sgvRangepicker.hide();
 	}
 
 }
