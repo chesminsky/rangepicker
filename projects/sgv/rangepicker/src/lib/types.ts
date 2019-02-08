@@ -27,4 +27,5 @@ export interface RangepickerPreset {
 
 export interface RangepickerConfig {
 	color?: string;
+	format?: string;
 }

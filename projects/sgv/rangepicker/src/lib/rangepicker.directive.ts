@@ -2,12 +2,13 @@
  * Rangepicker directive for input elements
  */
 
-import { Directive, Input, ElementRef, OnInit, HostListener, AfterViewInit, OnDestroy } from '@angular/core';
+import { Directive, Input, ElementRef, OnInit, HostListener, AfterViewInit, OnDestroy, Inject } from '@angular/core';
 import { SgvRangepickerComponent } from './rangepicker/rangepicker.component';
 import * as moment_ from 'moment';
 import { CalendarPeriod } from './types';
 import { Subscription } from 'rxjs';
 const moment = moment_;
+import { SgvRangepickerDefaultsService } from './defaults.service';
 
 @Directive({
 	selector: '[sgvRangepicker]'
@@ -20,7 +21,8 @@ export class SgvRangepickerDirective implements AfterViewInit, OnDestroy {
 	private sgvRangepicker: SgvRangepickerComponent;
 
 	constructor(
-		private elemRef: ElementRef
+		private elemRef: ElementRef,
+		@Inject(SgvRangepickerDefaultsService) private defaults
 	) {
 		this.windowClick = this.windowClick.bind(this);
 	}
@@ -32,7 +34,7 @@ export class SgvRangepickerDirective implements AfterViewInit, OnDestroy {
 		this.sub = this.sgvRangepicker.datesChanged.subscribe((period: CalendarPeriod) => {
 			const start = Number(period.start);
 			const end = Number(period.end);
-			this.elemRef.nativeElement.value = moment(start).format('DD.MM.YYYY') + ' - ' + moment(end).format('DD.MM.YYYY');
+			this.elemRef.nativeElement.value = moment(start).format(this.defaults.format) + ' - ' + moment(end).format(this.defaults.format);
 		});
 
 		window.addEventListener('click', this.windowClick);
@@ -74,8 +76,8 @@ export class SgvRangepickerDirective implements AfterViewInit, OnDestroy {
 		} else {
 			const dates = value.split(' - ');
 
-			const start = moment(dates[0], 'DD.MM.YYYY');
-			const end =  moment(dates[1], 'DD.MM.YYYY');
+			const start = moment(dates[0], this.defaults.format);
+			const end =  moment(dates[1], this.defaults.format);
 
 			valid = start.isValid() && end.isValid() && start.valueOf() <= end.valueOf();
 
