@@ -4,7 +4,7 @@ const moment = moment_;
 import { CalendarDay, CalendarPeriod, CalendarEvents, RangepickerPreset } from '../types';
 import { EventEmitter } from '@angular/core';
 import { presets } from '../presets';
-import { SgvRangepickerDefaultsService } from '../defaults.service';
+import { SgvRangepickerDefaultsService } from '../defaults';
 
 @Component({
 	selector: 'sgv-rangepicker',

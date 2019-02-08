@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { SgvRangepickerModule } from '@sgv/rangepicker';
+import { SgvRangepickerOptions } from '@sgv/rangepicker';
 
 @NgModule({
 	declarations: [
@@ -19,12 +20,12 @@ import { SgvRangepickerModule } from '@sgv/rangepicker';
 		MatInputModule,
 		FormsModule,
 		ReactiveFormsModule,
-		SgvRangepickerModule.forRoot({
-			// color: 'red',
-			// format: 'DD.MM.YY'
-		})
+		SgvRangepickerModule
 	],
-	providers: [ { provide: LOCALE_ID, useValue: 'ru' } ],
+	providers: [
+		{ provide: LOCALE_ID, useValue: 'ru' },
+		// { provide: SgvRangepickerOptions, useValue: { color: 'red' }}
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

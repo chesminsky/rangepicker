@@ -8,7 +8,7 @@ import * as moment_ from 'moment';
 import { CalendarPeriod } from './types';
 import { Subscription } from 'rxjs';
 const moment = moment_;
-import { SgvRangepickerDefaultsService } from './defaults.service';
+import { SgvRangepickerDefaultsService } from './defaults';
 
 @Directive({
 	selector: '[sgvRangepicker]'

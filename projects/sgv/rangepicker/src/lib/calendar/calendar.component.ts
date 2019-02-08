@@ -2,7 +2,7 @@ import { Component, OnInit, Input, LOCALE_ID, Inject } from '@angular/core';
 import * as moment_ from 'moment';
 const moment = moment_;
 import { CalendarDay, CalendarPeriod, CalendarEvents } from '../types';
-import { SgvRangepickerDefaultsService } from '../defaults.service';
+import { SgvRangepickerDefaultsService } from '../defaults';
 
 @Component({
 	selector: 'sgv-calendar',
