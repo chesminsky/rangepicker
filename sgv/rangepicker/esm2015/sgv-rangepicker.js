@@ -1,0 +1,10 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Generated bundle index. Do not edit.
+ */
+export { SgvRangepickerModule, SgvRangepickerDirective, SgvCalendarComponent, SgvRangepickerComponent, SgvTranslatePipe } from './public_api';
+export { SgvRangepickerDefaultsService as ɵa } from './lib/defaults.service';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2d2LXJhbmdlcGlja2VyLmpzIiwic291cmNlUm9vdCI6Im5nOi8vQHNndi9yYW5nZXBpY2tlci8iLCJzb3VyY2VzIjpbInNndi1yYW5nZXBpY2tlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7O0FBSUEsK0hBQWMsY0FBYyxDQUFDO0FBRTdCLE9BQU8sRUFBQyw2QkFBNkIsSUFBSSxFQUFFLEVBQUMsTUFBTSx3QkFBd0IsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogR2VuZXJhdGVkIGJ1bmRsZSBpbmRleC4gRG8gbm90IGVkaXQuXG4gKi9cblxuZXhwb3J0ICogZnJvbSAnLi9wdWJsaWNfYXBpJztcblxuZXhwb3J0IHtTZ3ZSYW5nZXBpY2tlckRlZmF1bHRzU2VydmljZSBhcyDJtWF9IGZyb20gJy4vbGliL2RlZmF1bHRzLnNlcnZpY2UnOyJdfQ==
