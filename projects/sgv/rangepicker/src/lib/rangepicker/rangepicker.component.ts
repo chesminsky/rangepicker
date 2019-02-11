@@ -16,7 +16,7 @@ export class SgvRangepickerComponent {
 	public period: CalendarPeriod;
 	public hoveredDate: moment_.Moment;
 	public presets: Array<RangepickerPreset> = presets;
-	public tab = 1;
+	public tab = 2;
 	public chunkSize = Math.ceil(this.presets.length / 2);
 
 	@Output()

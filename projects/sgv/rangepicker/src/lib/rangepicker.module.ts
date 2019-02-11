@@ -21,7 +21,8 @@ import { SgvRangepickerDefaultsService } from './defaults';
 		SgvRangepickerComponent
 	],
 	providers: [
-		SgvRangepickerDefaultsService
+		SgvRangepickerDefaultsService,
+		{ provide: LOCALE_ID, useValue: 'en' }
 	]
 })
 export class SgvRangepickerModule {}

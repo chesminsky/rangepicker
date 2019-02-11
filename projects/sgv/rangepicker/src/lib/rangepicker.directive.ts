@@ -73,6 +73,7 @@ export class SgvRangepickerDirective implements AfterViewInit, OnDestroy {
 
 		if (!value) {
 			valid = true;
+			this.sgvRangepicker.period = {};
 		} else {
 			const dates = value.split(' - ');
 
