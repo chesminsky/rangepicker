@@ -9,13 +9,21 @@ import { CalendarPeriod } from './types';
 import { Subscription } from 'rxjs';
 const moment = moment_;
 import { SgvRangepickerDefaultsService } from './defaults';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 @Directive({
-	selector: '[sgvRangepicker]'
+	selector: '[sgvRangepicker]',
+	providers: [{
+		provide: NG_VALUE_ACCESSOR,
+		useExisting: SgvRangepickerDirective,
+		multi: true,
+	}],
 })
-export class SgvRangepickerDirective implements AfterViewInit, OnDestroy {
+export class SgvRangepickerDirective implements AfterViewInit, OnDestroy, ControlValueAccessor {
 
 	private sub: Subscription;
+	onChange: any;
+	value: string;
 
 	@Input()
 	private sgvRangepicker: SgvRangepickerComponent;
@@ -27,6 +35,23 @@ export class SgvRangepickerDirective implements AfterViewInit, OnDestroy {
 		this.windowClick = this.windowClick.bind(this);
 	}
 
+	writeValue(value: any): void {
+		if (value) {
+			this.value = value;
+			this.elemRef.nativeElement.value = value;
+		}
+	}
+
+	registerOnChange(fn: any): void {
+		this.onChange = () => {
+			fn(this.value);
+		};
+	}
+
+	registerOnTouched(_fn: any): void {
+		return;
+	}
+
 	ngAfterViewInit() {
 		this.processChange(this.elemRef.nativeElement.value);
 		this.sgvRangepicker.init();
@@ -34,7 +59,10 @@ export class SgvRangepickerDirective implements AfterViewInit, OnDestroy {
 		this.sub = this.sgvRangepicker.datesChanged.subscribe((period: CalendarPeriod) => {
 			const start = Number(period.start);
 			const end = Number(period.end);
-			this.elemRef.nativeElement.value = moment(start).format(this.defaults.format) + ' - ' + moment(end).format(this.defaults.format);
+			this.writeValue(
+				moment(start).format(this.defaults.format) + ' - ' + moment(end).format(this.defaults.format)
+			);
+			this.onChange();
 		});
 
 		window.addEventListener('click', this.windowClick);

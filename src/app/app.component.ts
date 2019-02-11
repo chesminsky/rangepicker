@@ -7,5 +7,5 @@ import { FormControl } from '@angular/forms';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-	public date = '11.02.2019 - 11.02.2019';
+	public date;
 }
