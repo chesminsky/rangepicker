@@ -1,27 +1,61 @@
-# Rangepicker
+## Installation
+This library is based on moment js, so install it alongside
+```bash
+$ npm install @sgv/rangepicker moment@2.x
+```
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.7.
+## Usage
 
-## Development server
+```typescript
+import { SgvRangepickerModule } from '@sgv/rangepicker';
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+@NgModule({
+  imports: [
+    SgvRangepickerModule
+  ]
+})
+```
+Example with material text input (material ui is optional)
+```html
+<mat-form-field>
+    <input matInput [sgvRangepicker]="myDatepicker" placeholder="Choose a date">
+    <sgv-rangepicker #myDatepicker></sgv-rangepicker>
+</mat-form-field>
+```
 
-## Code scaffolding
+Also you can use it with reactive or template driven forms.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Options
+You can provide map of options.
+Custom color and date format available at this moment
+```typescript
+import { SgvRangepickerOptions } from '@sgv/rangepicker';
 
-## Build
+@NgModule({
+	providers: [
+		{
+		    provide: SgvRangepickerOptions,
+		    useValue: {
+		        color: 'red',  // default is '#3f51b5'
+		        format: 'DD.MM.YY' // default is 'DD.MM.YYYY'
+		    }
+		}
+	],
+})
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Events
+SgvRangepickerComponent emits datesChanged event when interval is changed.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Internationalization
+English is the default language.
+Russian is also available at this moment if you provide
+```typescript
+@NgModule({
+	providers: [
+		{ provide: LOCALE_ID, useValue: 'ru' },
+	],
+})
+```
+## Demo
+[Click here!](https://chesminsky.github.io/rangepicker).
