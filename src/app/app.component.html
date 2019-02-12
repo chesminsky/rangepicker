@@ -1,7 +1,17 @@
-<div class="container">
+
+<header>
+    <h1>
+        <span>@sgv/</span>rangepicker
+    </h1>
     <h2>
-        Rangepicker demo
-    </h2>
+        Rangepicker for angular with presets.
+    </h2>   
+</header>
+<div class="container">
+
+    <h3>
+        Example
+    </h3>
     <div style="width: 180px">
         <mat-form-field style="width: 100%">
             <input matInput [sgvRangepicker]="myDatepicker" placeholder="Choose a date" autocomplete="off" [(ngModel)]="date">
@@ -9,6 +19,10 @@
         </mat-form-field>
     </div>
     <div>
-        date model: {{ date }}
+        <b>ngModel:</b> {{ date }}
     </div>
+
+    <footer>
+        <a href="https://github.com/chesminsky/rangepicker" target="blank">Documentation here</a>
+    </footer>
 </div>

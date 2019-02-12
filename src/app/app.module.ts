@@ -23,7 +23,7 @@ import { SgvRangepickerOptions } from '@sgv/rangepicker';
 		SgvRangepickerModule
 	],
 	providers: [
-		{ provide: LOCALE_ID, useValue: 'ru' },
+		// { provide: LOCALE_ID, useValue: 'ru' },
 		// { provide: SgvRangepickerOptions, useValue: { color: 'red' }}
 	],
 	bootstrap: [AppComponent]

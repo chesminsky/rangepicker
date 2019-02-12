@@ -1,0 +1,41 @@
+
+.container {
+    background: white;
+    padding: 50px;
+    width: 1300px;
+    margin: 50px auto;
+    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.2);
+}
+
+header {
+    width: 1300px;
+    margin: 150px auto 50px;
+    text-align: center
+}
+
+h1 {
+    font-family: 'Secular One', sans-serif;
+    color: white;
+    margin: 0;
+    line-height: .5;
+    font-size: 50px;
+
+    span {
+        color: #ee0b42;
+    }
+}
+
+h2 {
+    color: white;
+    font-weight: 100;
+}
+
+a {
+    color: #ee0b42;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+footer {
+    margin-top: 50px;
+}
