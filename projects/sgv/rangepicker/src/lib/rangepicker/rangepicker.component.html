@@ -12,25 +12,17 @@
     <div class="m-calendar-wrapper__inner">
         <div *ngIf="tab === 1" class="m-calendar-wrapper__presets">
             <div class="m-calendar-wrapper__row">
-                <div class="m-calendar-wrapper__col">
+                <div class="m-calendar-wrapper__col" *ngFor="let col of [{ start: 0, end: chunkSize}, { start: chunkSize, end: presets.length}]">
                     <ul>
-                        <li *ngFor="let preset of presets | slice :  0 : chunkSize"
-                            [ngStyle]="preset.hovered ? {'color':  defaults.color } : {}"
-                            (click)="setPeriod(preset.code);"
-                            (mouseover)="preset.hovered=true"
-                            (mouseleave)="preset.hovered=false">
-                            {{ preset.code | translate }}
-                        </li>
-                    </ul>
-                </div>
-                <div class="m-calendar-wrapper__col">
-                    <ul>
-                        <li *ngFor="let preset of presets | slice : chunkSize: presets.length"
-                            [ngStyle]="preset.hovered ? {'color':  defaults.color } : {}"
-                            (click)="setPeriod(preset.code);"
-                            (mouseover)="preset.hovered=true"
-                            (mouseleave)="preset.hovered=false">
-                            {{ preset.code | translate}}
+                        <li *ngFor="let preset of presets | slice : col.start : col.end"
+                            (click)="setPeriod(preset.code);">
+                            <span class="m-calendar-wrapper__preset m-calendar-wrapper__preset--hovered"
+                                  [ngStyle]="{'color':  defaults.color }">
+                                {{ preset.code | translate }}
+                            </span>
+                            <span class="m-calendar-wrapper__preset">
+                                {{ preset.code | translate }}
+                            </span>
                         </li>
                     </ul>
                 </div>

@@ -22,7 +22,6 @@ export interface RangepickerPreset {
 	start:  moment.Moment;
 	end:  moment.Moment;
 	code: string;
-	hovered?: boolean;
 }
 
 export interface RangepickerConfig {

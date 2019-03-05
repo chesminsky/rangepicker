@@ -61,7 +61,6 @@ export class SgvRangepickerComponent {
 
 	public hide() {
 		this.visible = false;
-		this.presets.forEach((p) => p.hovered = false);
 	}
 
 	/**

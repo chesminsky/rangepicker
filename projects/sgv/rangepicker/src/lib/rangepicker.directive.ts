@@ -84,6 +84,7 @@ export class SgvRangepickerDirective implements AfterViewInit, OnDestroy, Contro
 	@HostListener('click', ['$event'])
 	public onclick(e): void {
 		e.stopPropagation();
+		this.sgvRangepicker.show();
 	}
 
 	/**
