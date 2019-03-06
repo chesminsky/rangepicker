@@ -88,6 +88,9 @@
 
 		&.is-selected {
 			color: #fff !important;
+			.m-calendar__selected-day {
+				display: block;
+			}
 		}
 	}
 

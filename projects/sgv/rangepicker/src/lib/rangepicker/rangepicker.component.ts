@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostListener, Output, Inject } from '@angular/core';
+import { Component, OnInit, Input, HostListener, Output, Inject, ElementRef } from '@angular/core';
 import * as moment_ from 'moment';
 const moment = moment_;
 import { CalendarDay, CalendarPeriod, CalendarEvents, RangepickerPreset } from '../types';
@@ -11,7 +11,7 @@ import { SgvRangepickerDefaultsService } from '../defaults';
 	templateUrl: './rangepicker.component.html',
 	styleUrls: ['./rangepicker.component.scss']
 })
-export class SgvRangepickerComponent {
+export class SgvRangepickerComponent implements OnInit {
 
 	public period: CalendarPeriod;
 	public hoveredDate: moment_.Moment;
@@ -52,8 +52,13 @@ export class SgvRangepickerComponent {
 	public visible = false;
 
 	constructor(
-		@Inject(SgvRangepickerDefaultsService) public defaults
+		@Inject(SgvRangepickerDefaultsService) public defaults,
+		private elemRef: ElementRef
 	) {}
+
+	public ngOnInit() {
+		this.stylize();
+	}
 
 	public show() {
 		this.visible = true;
@@ -130,5 +135,20 @@ export class SgvRangepickerComponent {
 	 */
 	private getPresetValueByCode(code: string, key: 'start' | 'end'): number  {
 		return this.presets.find(p => p.code === code)[key].valueOf();
+	}
+
+	private stylize() {
+		const css = `
+				.m-calendar-wrapper__header {
+					background: ${this.defaults.color}
+				}
+				.m-calendar-wrapper__preset:hover {
+					color: ${this.defaults.color}
+				}
+		`;
+
+		const style = document.createElement('style');
+		style.innerHTML = css;
+		this.elemRef.nativeElement.appendChild(style);
 	}
 }

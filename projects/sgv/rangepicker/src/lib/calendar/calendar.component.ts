@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, LOCALE_ID, Inject } from '@angular/core';
+import { Component, OnInit, Input, LOCALE_ID, Inject, ElementRef } from '@angular/core';
 import * as moment_ from 'moment';
 const moment = moment_;
 import { CalendarDay, CalendarPeriod, CalendarEvents } from '../types';
@@ -29,7 +29,8 @@ export class SgvCalendarComponent implements OnInit {
 
 	constructor(
 		@Inject(LOCALE_ID) private locale: string,
-		@Inject(SgvRangepickerDefaultsService) public defaults
+		@Inject(SgvRangepickerDefaultsService) public defaults,
+		private elemRef: ElementRef
 	) {}
 
 	public ngOnInit() {
@@ -53,6 +54,8 @@ export class SgvCalendarComponent implements OnInit {
 
 			this.init();
 		});
+
+		this.stylize();
 	}
 
 	public getMonthTitle(): string {
@@ -157,6 +160,21 @@ export class SgvCalendarComponent implements OnInit {
 			this.monthIndex = 11;
 			this.year--;
 		}
+	}
+
+	private stylize() {
+		const css = `
+				.m-calendar__day.is-between {
+					color: ${this.defaults.color}
+				}
+				.m-calendar__selected-day {
+					background: ${this.defaults.color}
+				}
+		`;
+
+		const style = document.createElement('style');
+		style.innerHTML = css;
+		this.elemRef.nativeElement.appendChild(style);
 	}
 
 }

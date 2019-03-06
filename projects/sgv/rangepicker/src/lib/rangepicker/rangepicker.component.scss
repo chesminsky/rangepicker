@@ -91,21 +91,6 @@
 			list-style: none;
 
 			cursor: pointer;
-
-			&:hover {
-				.m-calendar-wrapper__preset {
-					display: none;
-				}
-				.m-calendar-wrapper__preset--hovered {
-					display: inline;
-				}
-			}
-		}
-	}
-
-	&__preset {
-		&--hovered {
-			display: none;
 		}
 	}
 }

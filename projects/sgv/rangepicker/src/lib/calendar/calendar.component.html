@@ -24,13 +24,12 @@
 					<span class="m-calendar__day"
 						  [ngClass]="{
 									'is-today': day.isToday,
-									'is-selected': isSelected(day.date)
+									'is-selected': isSelected(day.date),
+									'is-between': isBetween(day.date)
 									}"
-						  [ngStyle]="isBetween(day.date) ? {'color': defaults.color} : {}"
 						  *ngIf="day.isCurrentMonth">
 						{{day.number}}
-						<span class="m-calendar__selected-day"
-							  [ngStyle]="isSelected(day.date) ? {'background-color': defaults.color, 'display': 'block'} : {}"></span>
+						<span class="m-calendar__selected-day"></span>
 					</span>
 				</td>
 			</tr>
