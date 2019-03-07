@@ -68,6 +68,29 @@ export class SgvRangepickerComponent implements OnInit {
 		this.visible = false;
 	}
 
+	public isValid(value: string) {
+		const { start, end } = this.parseStr(value);
+
+		return start.isValid() && end.isValid() && start.valueOf() <= end.valueOf();
+	}
+
+	public parseStr(value: string): { start: moment_.Moment, end: moment_.Moment} {
+		const dates = value.split(' - ');
+
+		const start = moment(dates[0], this.defaults.format, true);
+		const end = moment(dates[1], this.defaults.format, true);
+
+		return { start, end };
+	}
+
+	public setPeriod(value: string) {
+		const { start, end } = this.parseStr(value);
+		this.period  = {
+			start: start.valueOf(),
+			end: end.valueOf()
+		};
+	}
+
 	/**
 	 * Initialize rangepicker
 	 */
@@ -121,7 +144,7 @@ export class SgvRangepickerComponent implements OnInit {
 	/**
 	 * Set period from presets
 	 */
-	public setPeriod(code: string): void {
+	public pickPreset(code: string): void {
 		this.period.start = this.getPresetValueByCode(code, 'start');
 		this.period.end = this.getPresetValueByCode(code, 'end');
 		this.hide();

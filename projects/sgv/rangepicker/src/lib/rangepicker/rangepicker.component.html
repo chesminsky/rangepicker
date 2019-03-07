@@ -15,7 +15,7 @@
                 <div class="m-calendar-wrapper__col" *ngFor="let col of [{ start: 0, end: chunkSize}, { start: chunkSize, end: presets.length}]">
                     <ul>
                         <li *ngFor="let preset of presets | slice : col.start : col.end"
-                            (click)="setPeriod(preset.code);">
+                            (click)="pickPreset(preset.code);">
                             <span class="m-calendar-wrapper__preset">
                                 {{ preset.code | translate }}
                             </span>

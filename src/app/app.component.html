@@ -19,8 +19,8 @@
                        placeholder="Choose a date"
                        formControlName="date"
                        required>
-                <mat-error *ngIf="form.hasError('required')">
-                    required
+                <mat-error *ngIf="form.get('date').hasError('dateFormat')">
+                    date format is invalid
                 </mat-error>
                 <sgv-rangepicker #myDatepicker></sgv-rangepicker>
             </mat-form-field>
@@ -32,7 +32,7 @@
             <b>Form valid:</b> {{ form.valid }}
         </p>
         <div style="margin-top: 20px;">
-            <button mat-raised-button color="primary" (click)="setModel()" type="button">Set last week</button>
+            <button mat-raised-button color="primary" (click)="setModel()" type="button">Set current week</button>
         </div>
     </form>
 

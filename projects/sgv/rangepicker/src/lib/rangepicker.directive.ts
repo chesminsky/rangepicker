@@ -2,20 +2,24 @@
  * Rangepicker directive for input elements
  */
 
-import { Directive, Input, ElementRef, OnInit, HostListener, AfterViewInit, OnDestroy, Inject } from '@angular/core';
+import { Directive, Input, ElementRef, OnInit, HostListener, AfterViewInit, OnDestroy, Inject, forwardRef } from '@angular/core';
 import { SgvRangepickerComponent } from './rangepicker/rangepicker.component';
 import * as moment_ from 'moment';
 import { CalendarPeriod } from './types';
 import { Subscription } from 'rxjs';
 const moment = moment_;
 import { SgvRangepickerDefaultsService } from './defaults';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor, FormControl, NG_VALIDATORS } from '@angular/forms';
 
 @Directive({
 	selector: '[sgvRangepicker]',
 	providers: [{
 		provide: NG_VALUE_ACCESSOR,
-		useExisting: SgvRangepickerDirective,
+		useExisting: forwardRef(() => SgvRangepickerDirective),
+		multi: true,
+	}, {
+		provide: NG_VALIDATORS,
+		useExisting: forwardRef(() => SgvRangepickerDirective),
 		multi: true,
 	}],
 })
@@ -95,6 +99,14 @@ export class SgvRangepickerDirective implements AfterViewInit, OnDestroy, Contro
 		this.value = event.target.value;
 	}
 
+	public validate(c: FormControl) {
+		return (c.value && this.sgvRangepicker.isValid(c.value)) ? null : {
+			dateFormat: {
+				valid: false,
+			},
+		};
+	}
+
 	/**
 	 * set rangepicker model
 	 * @param value - input string
@@ -107,18 +119,9 @@ export class SgvRangepickerDirective implements AfterViewInit, OnDestroy, Contro
 			valid = true;
 			this.sgvRangepicker.period = {};
 		} else {
-			const dates = value.split(' - ');
-
-			const start = moment(dates[0], this.defaults.format);
-			const end = moment(dates[1], this.defaults.format);
-
-			valid = start.isValid() && end.isValid() && start.valueOf() <= end.valueOf();
-
+			valid = this.sgvRangepicker.isValid(value);
 			if (valid) {
-				this.sgvRangepicker.period = {
-					start: start.valueOf(),
-					end: end.valueOf()
-				};
+				this.sgvRangepicker.setPeriod(value);
 			} else {
 				this.sgvRangepicker.period = {};
 				this.sgvRangepicker.hide();
