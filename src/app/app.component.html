@@ -1,29 +1,40 @@
-
 <header>
     <h1>
         <span>@sgv/</span>rangepicker
     </h1>
     <h2>
         Rangepicker for angular with presets.
-    </h2>   
+    </h2>
 </header>
 <div class="container">
 
-    <h3>
-        Example
-    </h3>
-    <div style="width: 180px">
-        <mat-form-field style="width: 100%">
-            <input matInput [sgvRangepicker]="myDatepicker" placeholder="Choose a date" autocomplete="off" [(ngModel)]="date">
-            <sgv-rangepicker #myDatepicker></sgv-rangepicker>
-        </mat-form-field>
-    </div>
-    <div>
-        <b>ngModel:</b> {{ date }}
-    </div>
-    <div style="margin-top: 20px;">
-        <button mat-raised-button color="primary" (click)="setModel()">Set last week</button>
-    </div>
+    <form [formGroup]="form" autocomplete="off">
+        <h3>
+            Example
+        </h3>
+        <div style="width: 180px">
+            <mat-form-field style="width: 100%">
+                <input matInput
+                       [sgvRangepicker]="myDatepicker"
+                       placeholder="Choose a date"
+                       formControlName="date"
+                       required>
+                <mat-error *ngIf="form.hasError('required')">
+                    required
+                </mat-error>
+                <sgv-rangepicker #myDatepicker></sgv-rangepicker>
+            </mat-form-field>
+        </div>
+        <p>
+            <b>ngModel:</b> {{ form.get('date').value }}
+        </p>
+        <p>
+            <b>Form valid:</b> {{ form.valid }}
+        </p>
+        <div style="margin-top: 20px;">
+            <button mat-raised-button color="primary" (click)="setModel()" type="button">Set last week</button>
+        </div>
+    </form>
 
     <footer>
         <a href="https://github.com/chesminsky/rangepicker" target="blank">Documentation here</a>
