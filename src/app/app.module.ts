@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { MatFormFieldModule } from '@angular/material';
+import { MatFormFieldModule, MatButtonModule } from '@angular/material';
 import { MatInputModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -18,6 +18,7 @@ import { SgvRangepickerOptions } from '@sgv/rangepicker';
 		BrowserAnimationsModule,
 		MatFormFieldModule,
 		MatInputModule,
+		MatButtonModule,
 		FormsModule,
 		ReactiveFormsModule,
 		SgvRangepickerModule

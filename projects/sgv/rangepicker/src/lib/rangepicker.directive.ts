@@ -21,12 +21,12 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 })
 export class SgvRangepickerDirective implements AfterViewInit, OnDestroy, ControlValueAccessor {
 
+	private val: string;
 	private sub: Subscription;
-	onChange: any;
-	value: string;
-
 	@Input()
 	private sgvRangepicker: SgvRangepickerComponent;
+	private onTouch: any = () => {};
+	private onChange: any = () => {};
 
 	constructor(
 		private elemRef: ElementRef,
@@ -35,34 +35,36 @@ export class SgvRangepickerDirective implements AfterViewInit, OnDestroy, Contro
 		this.windowClick = this.windowClick.bind(this);
 	}
 
-	writeValue(value: any): void {
-		if (value) {
-			this.value = value;
-			this.elemRef.nativeElement.value = value;
+	writeValue(value: any) {
+		this.value = value;
+	}
+
+	registerOnChange(fn: any) {
+		this.onChange = fn;
+	}
+
+	registerOnTouched(fn: any) {
+		this.onTouch = fn;
+	}
+
+	set value(val) {
+		if (val !== undefined && this.val !== val) {
+			this.val = val;
+			this.elemRef.nativeElement.value = val;
+			this.onChange(val);
+			this.onTouch(val);
+			this.setPickerModel();
 		}
 	}
 
-	registerOnChange(fn: any): void {
-		this.onChange = () => {
-			fn(this.value);
-		};
-	}
-
-	registerOnTouched(_fn: any): void {
-		return;
-	}
-
 	ngAfterViewInit() {
-		this.processChange(this.elemRef.nativeElement.value);
+		this.setPickerModel();
 		this.sgvRangepicker.init();
 
 		this.sub = this.sgvRangepicker.datesChanged.subscribe((period: CalendarPeriod) => {
 			const start = Number(period.start);
 			const end = Number(period.end);
-			this.writeValue(
-				moment(start).format(this.defaults.format) + ' - ' + moment(end).format(this.defaults.format)
-			);
-			this.onChange();
+			this.value = moment(start).format(this.defaults.format) + ' - ' + moment(end).format(this.defaults.format);
 		});
 
 		window.addEventListener('click', this.windowClick);
@@ -87,21 +89,18 @@ export class SgvRangepickerDirective implements AfterViewInit, OnDestroy, Contro
 		this.sgvRangepicker.show();
 	}
 
-	/**
-	 * Pick dates on input changes
-	 * @param event - input event
-	 */
+
 	@HostListener('input', ['$event'])
 	public onInput(event): void {
-		const value = event.target.value;
-		this.processChange(value);
+		this.value = event.target.value;
 	}
 
 	/**
-	 * Process changes of input element, set rangepicker model
+	 * set rangepicker model
 	 * @param value - input string
 	 */
-	private processChange(value: string): void {
+	private setPickerModel(): void {
+		const value = this.val;
 		let valid: boolean;
 
 		if (!value) {
@@ -111,7 +110,7 @@ export class SgvRangepickerDirective implements AfterViewInit, OnDestroy, Contro
 			const dates = value.split(' - ');
 
 			const start = moment(dates[0], this.defaults.format);
-			const end =  moment(dates[1], this.defaults.format);
+			const end = moment(dates[1], this.defaults.format);
 
 			valid = start.isValid() && end.isValid() && start.valueOf() <= end.valueOf();
 
