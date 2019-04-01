@@ -69,8 +69,10 @@ export class SgvRangepickerComponent implements OnInit {
 	}
 
 	public isValid(value: string) {
+		if (!value) {
+			return true;
+		}
 		const { start, end } = this.parseStr(value);
-
 		return start.isValid() && end.isValid() && start.valueOf() <= end.valueOf();
 	}
 

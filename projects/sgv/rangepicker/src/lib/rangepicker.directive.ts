@@ -100,7 +100,7 @@ export class SgvRangepickerDirective implements AfterViewInit, OnDestroy, Contro
 	}
 
 	public validate(c: FormControl) {
-		return (c.value && this.sgvRangepicker.isValid(c.value)) ? null : {
+		return (this.sgvRangepicker.isValid(c.value)) ? null : {
 			dateFormat: {
 				valid: false,
 			},
